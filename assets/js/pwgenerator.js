@@ -3,6 +3,9 @@ var length, lowerCase, upperCase, numeric, symbol, charArray, charset, password;
 //function for execution on button click
 document.getElementById('generate').onclick = function generate() {
 	length = prompt('How many characters?', '8 min; 128 max');
+	if (length == null) {
+		length = 8;
+	}
 	//convert length prompt to number
     len = parseInt(length);
     // set min/max length to 8-128
