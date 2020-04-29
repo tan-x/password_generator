@@ -1,0 +1,29 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.card {
+    margin: 20px 0;
+    width: 60vw;
+    max-width: 800px;
+    text-align: center;
+}
+
+.card-text {
+    background: rgb(233, 233, 233);
+    border: 2px dashed rgb(134, 134, 134);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+pre {
+    margin: 10px;
+    white-space: pre-wrap;
+}
