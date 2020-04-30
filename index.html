@@ -22,6 +22,23 @@
             <button class="btn btn-danger" id="generate">Generate Password</button>
             <button class="btn btn-success" id="regenerate">Regenerate Password</button>
             </div>
+            <form class="form-inline flex-center">
+                <label for="length-input" class="col-1 col-form-label">Length</label>
+                <input type="number" class="form-control col-1" value="8" id="lengthIn">
+                <div class="form-check mb-2 mr-sm-2 mb-sm-0">    
+                    <label for="form-check-label" class="form-check-label">lowercase</label>
+                    <input type="checkbox" class="form-control" id="lower">
+
+                    <label for="form-check-label" class="form-check-label">UPPERcase</label>
+                    <input type="checkbox" class="form-control" id="upper">
+
+                    <label for="form-check-label" class="form-check-label">Numbers</label>
+                    <input type="checkbox" class="form-control" id="num">
+
+                    <label for="form-check-label" class="form-check-label">Symbols</label>
+                    <input type="checkbox" class="form-control" id="sym">
+                </div>
+            </form>
             <p id="require"></p>
         </div>
     </div>

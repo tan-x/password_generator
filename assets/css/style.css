@@ -27,3 +27,13 @@ pre {
     margin: 10px;
     white-space: pre-wrap;
 }
+
+form {
+    margin: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+form input {
+    margin: 0 15px;
+}
