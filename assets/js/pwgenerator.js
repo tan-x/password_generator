@@ -1,123 +1,121 @@
 var length, lowerCase, upperCase, numeric, symbol, charArray, charset, password;
+var lengthTarget, lowerTarget, upperTarget, numTarget, symTarget, passTarget;
+
+// define target variables to keep code clean
+lengthTarget = document.getElementById('lengthIn');
+lowerTarget = document.getElementById('lower');
+upperTarget = document.getElementById('upper');
+numTarget = document.getElementById('num');
+symTarget = document.getElementById('sym');
+passTarget = document.getElementById('pass');
 
 // array with 4 different char types
-charArray = [
-  "abcdefghijklmnopqrstuvwxyz",
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "0123456789",
-  "!@#$%^&*()?",
-];
+charArray = ['abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', '0123456789', '!@#$%^&*()?'];
 
-// function for execution on button click
-document.getElementById("generate").onclick = function generate() {
-  length = parseInt(prompt("How many characters?", "Enter a number between 8 & 128"));
-
-  // require number input, alert user and continue prompt until number is entered
-  if (isNaN(length)) {
-    do {
-      alert("Must be a number!");
-      length = parseInt(prompt("How many characters?", "Enter a number between 8 & 128"));
-    } while (isNaN(length));
-  }
-  
-  // if cancel is hit, set PW length to 8 as default
-  if (length == null) {
-    length = 8;
-    alert("Default length is 8 characters.");
-  }
-
-  // set min/max length to 8-128
-  length = Math.min(128, Math.max(8, length));
-  lowerCase = confirm("Include lowercase characters?");
-  upperCase = confirm("Include uppercase characters?");
-  numeric = confirm("Include numeric characters?");
-  symbol = confirm("Include special characters?");
-
-  // reset password to blank string
-  password = "";
-  charset = "";
-
-  // change length form input to match prompt input
-  document.getElementById("lengthIn").value = length;
-
-  // conditional statements adding corresponding character type from array to charset variable string
-  if (lowerCase) {
-    charset += charArray[0];
-    //c hange lowercase checkbox input to match confirm input
-    document.getElementById("lower").checked = true;
-  }
-
-  if (upperCase) {
-    charset += charArray[1];
-    // change uppercase checkbox input to match confirm input
-    document.getElementById("upper").checked = true;
-  }
-
-  if (numeric) {
-    charset += charArray[2];
-    // change number checkbox input to match confirm input
-    document.getElementById("num").checked = true;
-  }
-
-  if (symbol) {
-    charset += charArray[3];
-    // change symbol checkbox input to match confirm input
-    document.getElementById("sym").checked = true;
-  }
-  // if no character types selected, return numeric password and alert
-  if (charset === "") {
-    charset += charArray[2];
-    document.getElementById("num").checked = true;
-    alert("Requires one character type. Numbers were selected by default.");
-  }
-  
-  // randomly pull from compiled charset string and add to password until meeting length
+// function to randomly pull from compiled charset string and add to password until meeting length
+function randomPass() {
   for (var i = 0, n = charset.length; i < length; ++i) {
-    password += charset.charAt(Math.floor(Math.random() * n));
-  }
-  // print new password
-  document.getElementById("pass").innerHTML = password;
+		password += charset.charAt(Math.floor(Math.random() * n));
+	}
 };
 
-document.getElementById("regenerate").onclick = function regenerate() {
-  length = document.getElementById("lengthIn").value;
-  // set min/max length to 8-128
-  length = Math.min(128, Math.max(8, length));
-  lowerCase = document.getElementById("lower").checked;
-  upperCase = document.getElementById("upper").checked;
-  numeric = document.getElementById("num").checked;
-  symbol = document.getElementById("sym").checked;
-
-  // reset password to blank string
-  password = "";
-  charset = "";
-
+function charSet() {
   // conditional statements adding corresponding character type from array to charset variable string
-  if (lowerCase) {
-    charset += charArray[0];
-  }
+	if (lowerCase) {
+		charset += charArray[0];
+		//c hange lowercase checkbox input to match confirm input
+		lowerTarget.checked = true;
+	}
 
-  if (upperCase) {
-    charset += charArray[1];
-  }
+	if (upperCase) {
+		charset += charArray[1];
+		// change uppercase checkbox input to match confirm input
+		upperTarget.checked = true;
+	}
 
-  if (numeric) {
-    charset += charArray[2];
-  }
+	if (numeric) {
+		charset += charArray[2];
+		// change number checkbox input to match confirm input
+		numTarget.checked = true;
+	}
 
-  if (symbol) {
-    charset += charArray[3];
-  }
-  // if no character types selected, return numeric password and alert
-  if (charset === "") {
-    charset += charArray[2];
-    document.getElementById("num").checked = true;
-    alert("Requires one character type. Numbers were selected by default.");
-  }
+	if (symbol) {
+		charset += charArray[3];
+		// change symbol checkbox input to match confirm input
+		symTarget.checked = true;
+	}
+	// if no character types selected, return numeric password and alert
+	if (charset === '') {
+		charset += charArray[2];
+		numTarget.checked = true;
+		alert('Requires one character type. Numbers were selected by default.');
+	}
+}
+// function for execution on button click
+document.getElementById('generate').onclick = function generate() {
+	length = parseInt(prompt('How many characters?', 'Enter a number between 8 & 128'));
 
-  for (var i = 0, n = charset.length; i < length; ++i) {
-    password += charset.charAt(Math.floor(Math.random() * n));
+	// require number input, alert user and continue prompt until number is entered
+	if (isNaN(length)) {
+		do {
+			alert('Must be a number!');
+			length = parseInt(prompt('How many characters?', 'Enter a number between 8 & 128'));
+		} while (isNaN(length));
+	}
+
+	// if cancel is hit, set PW length to 8 as default
+	if (length == null) {
+		length = 8;
+		alert('Default length is 8 characters.');
+	}
+
+	// set min/max length to 8-128
+	length = Math.min(128, Math.max(8, length));
+	lowerCase = confirm('Include lowercase characters?');
+	upperCase = confirm('Include uppercase characters?');
+	numeric = confirm('Include numeric characters?');
+	symbol = confirm('Include special characters?');
+
+	// reset password to blank string
+	password = '';
+	charset = '';
+
+	// change length form input to match prompt input
+	lengthTarget.value = length;
+
+	charSet();
+
+	// randomly pull from compiled charset string and add to password until meeting length
+  randomPass ();
+  
+	// print new password
+	passTarget.innerHTML = password;
+};
+
+document.getElementById('regenerate').onclick = function regenerate() {
+  
+  length = lengthTarget.value;
+  // set display value in input to required range if user input is outside of range
+  if (length < 8 || length > 128){
+    // set min/max length to 8-128
+    length = Math.min(128, Math.max(8, length));
+    lengthTarget.value = length;
   }
-  // print new password
-  document.getElementById("pass").innerHTML = password;
+	
+	lowerCase = lowerTarget.checked;
+	upperCase = upperTarget.checked;
+	numeric = numTarget.checked;
+	symbol = symTarget.checked;
+
+	// reset password to blank string
+	password = '';
+	charset = '';
+
+	charSet();
+
+  // randomly pull from compiled charset string and add to password until meeting length
+  randomPass ();
+  
+	// print new password
+	passTarget.innerHTML = password;
 };
