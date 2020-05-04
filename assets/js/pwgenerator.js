@@ -109,6 +109,7 @@ document.getElementById("regenerate").onclick = function regenerate() {
   // if no character types selected, return numeric password and alert
   if (charset === "") {
     charset += charArray[2];
+    document.getElementById("num").checked = true;
     alert("Requires one character type. Numbers were selected by default.");
   }
 
