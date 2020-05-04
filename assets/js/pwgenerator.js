@@ -10,7 +10,7 @@ symTarget = document.getElementById('sym');
 passTarget = document.getElementById('pass');
 
 // array with 4 different char types
-charArray = ['abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', '0123456789', '!@#$%^&*()?'];
+charArray = ['abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', '0123456789', '!@#$%^&*(){}?'];
 
 // function to randomly pull from compiled charset string and add to password until meeting length
 function randomPass() {
@@ -51,16 +51,17 @@ function charSet() {
 		alert('Requires one character type. Numbers were selected by default.');
 	}
 }
+
 // function for execution on button click
 document.getElementById('generate').onclick = function generate() {
 	length = parseInt(prompt('How many characters?', 'Enter a number between 8 & 128'));
 
 	// require number input, alert user and continue prompt until number is entered
-	if (isNaN(length)) {
+	if (isNaN(length) || length < 8 || length > 128) {
 		do {
-			alert('Must be a number!');
+			alert('Must be a number between 8 & 128!');
 			length = parseInt(prompt('How many characters?', 'Enter a number between 8 & 128'));
-		} while (isNaN(length));
+		} while (isNaN(length) || length < 8 || length > 128);
 	}
 
 	// if cancel is hit, set PW length to 8 as default
@@ -83,6 +84,7 @@ document.getElementById('generate').onclick = function generate() {
 	// change length form input to match prompt input
 	lengthTarget.value = length;
 
+  // add corresponding character type from array to charset variable string
 	charSet();
 
 	// randomly pull from compiled charset string and add to password until meeting length
@@ -111,6 +113,7 @@ document.getElementById('regenerate').onclick = function regenerate() {
 	password = '';
 	charset = '';
 
+  // add corresponding character type from array to charset variable string
 	charSet();
 
   // randomly pull from compiled charset string and add to password until meeting length
