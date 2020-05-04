@@ -13,10 +13,12 @@ document.getElementById("generate").onclick = function generate() {
   length = parseInt(prompt("How many characters?", "Enter a number between 8 & 128"));
 
   // require number input, alert user and continue prompt until number is entered
-  do {
-    alert("Must be a number!");
-    length = parseInt(prompt("How many characters?", "Enter a number between 8 & 128"));
-  } while (isNaN(length));
+  if (isNaN(length)) {
+    do {
+      alert("Must be a number!");
+      length = parseInt(prompt("How many characters?", "Enter a number between 8 & 128"));
+    } while (isNaN(length));
+  }
   
   // if cancel is hit, set PW length to 8 as default
   if (length == null) {
