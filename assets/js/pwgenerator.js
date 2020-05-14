@@ -54,15 +54,22 @@ function charSet() {
 
 // function for execution on button click
 document.getElementById('generate').onclick = function generate() {
-	length = parseInt(prompt('How many characters?', 'Enter a number between 8 & 128'));
+	length = prompt('How many characters?', 'Enter a number between 8 & 128');
 
 	// require number input, alert user and continue prompt until number is entered
-	if (isNaN(length) || length < 8 || length > 128) {
+	
+	if (length == null) {
+		length = 8;
+		return;
+	} else if (isNaN(length) || length < 8 || length > 128) {
 		do {
 			alert('Must be a number between 8 & 128!');
 			length = parseInt(prompt('How many characters?', 'Enter a number between 8 & 128'));
 		} while (isNaN(length) || length < 8 || length > 128);
+	} else {
+		parseInt(length);
 	}
+
 
 	// if cancel is hit, set PW length to 8 as default
 	if (length == null) {
